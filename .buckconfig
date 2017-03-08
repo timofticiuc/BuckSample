@@ -1,0 +1,33 @@
+[cache]
+  mode = dir
+
+[cxx]
+  default_platform = iphonesimulator-x86_64
+  cflags = -g -std=c11
+  cxxflags = -g -std=c++14
+  # Many ARC APIs don't compile with separate preprocess and compile.
+  combined_preprocess_and_compile = true
+
+[alias]
+  buck_app = //ios/BuckSample:BuckSample
+
+[apple]
+  xctool_zip_target = //third-party/ios/xctool:xctool-minimal-zip
+
+[java]
+  src_roots = /android/java/
+  source_level = 6
+  target_level = 6
+
+[project]
+    ide_prompt = false
+    ide = XCode
+    ignore = .buckd, \
+             .hg, \
+             .git, \
+             .idea, \
+             buck-cache, \
+             buck-out, \
+
+
+

@@ -1,0 +1,29 @@
+# Copyright 2015-present, Facebook, Inc.
+# All rights reserved.
+#
+# This source code is licensed under the license found in the
+# LICENSE file in the root directory of this source tree.
+
+apple_library(
+  name = 'ObjcDynamicLibrary',
+  srcs = glob(['ObjcFramework/*.m']),
+  preprocessor_flags = ['-fobjc-arc'],
+  exported_headers = ['ObjcFramework/SampleObjcClass.h'],
+  visibility = ['PUBLIC'],
+  info_plist = 'ObjcFramework/Info.plist',
+  #preferred_linkage = 'shared',
+  header_path_prefix = 'ObjcFramework',
+
+  frameworks = [
+    '$SDKROOT/System/Library/Frameworks/UIKit.framework',
+    '$SDKROOT/System/Library/Frameworks/Foundation.framework',
+  ],
+)
+
+apple_bundle(
+  name = 'ObjcFramework',
+  binary = ':ObjcDynamicLibrary#shared',
+  extension = 'framework',
+  info_plist = 'ObjcFramework/Info.plist',
+  visibility = ['PUBLIC'],
+)

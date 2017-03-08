@@ -1,0 +1,36 @@
+# Copyright 2015-present, Facebook, Inc.
+# All rights reserved.
+#
+# This source code is licensed under the license found in the
+# LICENSE file in the root directory of this source tree.
+
+
+apple_resource(
+  name = 'BuckSampleAppResources',
+  files = glob(['*.png','*.storyboard']),
+  dirs = [],
+)
+
+apple_bundle(
+  name = 'BuckSample',
+  binary = ':BuckSampleBinary',
+  extension = 'app',
+  info_plist = 'Info.plist',
+  deps = [':BuckSampleAppResources'],
+)
+
+apple_binary(
+  name = 'BuckSampleBinary',
+  preprocessor_flags = ['-fobjc-arc'],
+  headers = glob([
+    '*.h',
+  ]),
+  srcs = glob([
+    '*.m',
+  ]),
+  deps = ['//ios/BuckSample/ObjcFramework:ObjcFramework'],
+  frameworks = [
+    '$SDKROOT/System/Library/Frameworks/UIKit.framework',
+    '$SDKROOT/System/Library/Frameworks/Foundation.framework',
+  ],
+)
